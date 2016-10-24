@@ -24,6 +24,8 @@ namespace VR_Interfaces_Project
         private ushort countWrittenToDisplay = 0;
         private Game mGame;
         private RotatedRect[,] rects;
+        private bool mIsRunning = false;
+        private const int PCWEBCAM = 0, ANDROIDWEBCAM = 1;
 
         #region Properties
         public Panel GameView
@@ -98,7 +100,14 @@ namespace VR_Interfaces_Project
         {
             try
             {
-                mCapture = new Capture();
+                if (rbPCWebcam.Checked)
+                {
+                    mCapture = new Capture(PCWEBCAM);
+                }
+                else if (rbAndroid.Checked)
+                {
+                    mCapture = new Capture(ANDROIDWEBCAM);
+                }
             }
             catch (NullReferenceException excpt)
             {
@@ -132,6 +141,7 @@ namespace VR_Interfaces_Project
                 if (port.IsOpen)
                 {
                     WriteInfoToDisplay(rtbPreviewInfo, "Succeeded opening " + cbPorts.SelectedItem + "!");
+                    mIsRunning = true;
                     bttnStart.Enabled = false;
                     bttnStop.Enabled = true;
                 }
@@ -178,60 +188,65 @@ namespace VR_Interfaces_Project
         private void ProcessFrame(object sender, EventArgs e)
         {
             Mat img = mCapture.QueryFrame();
+            ApplyImg(img);
+        }
+
+        private void ApplyImg(Mat image)
+        {
             Mat endImg = new Mat();
 
-            if (img != null)
+            if (image != null)
             {
                 if (rbBgr.Checked)
                 {
                     // Do nothing with the original image
                     // So just put it in the endImg variable
-                    endImg = img;
+                    endImg = image;
                 }
 
                 if (rbGray.Checked)
                 {
-                    endImg = ConvertToGray(img);
+                    endImg = ConvertToGray(image);
                 }
 
                 if (rbCanny.Checked)
                 {
-                    endImg = ConvertToCanny(img, tbMinThresh.Value, tbMaxThresh.Value);
+                    endImg = ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value);
                 }
 
                 if (rbGrid.Checked)
                 {
-                    endImg = DetectRectangles(ConvertToCanny(img, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                    endImg = DetectRectangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
                 }
 
                 if (rbCircle.Checked)
                 {
-                    endImg = DetectCircles(ConvertToGray(img), tbCannyThresh.Value, tbAcumulatorThresh.Value, (double)numDp.Value, (double)numMinDist.Value, (int)numMinRadius.Value, Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (int)numThickness.Value);
+                    endImg = DetectCircles(ConvertToGray(image), tbCannyThresh.Value, tbAcumulatorThresh.Value, (double)numDp.Value, (double)numMinDist.Value, (int)numMinRadius.Value, Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (int)numThickness.Value);
                 }
 
                 if (rbTriangle.Checked)
                 {
-                    endImg = DetectTriangles(ConvertToCanny(img, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                    endImg = DetectTriangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
                 }
 
                 // Put the original img in the camera viewbox
-                ibCamView.Image = img;
-       
+                ibCamView.Image = image;
+
                 // Put the endIg in the imagebox
                 ibPreview.Image = endImg;
             }
         }
-       
+
         /// <summary>
         /// Stop recording.
         /// </summary>
         private void Release()
         {
-            if(mCapture != null)
+            if (mCapture != null)
             {
                 mCapture.Dispose();
                 ibPreview.Image = null;
-            }
+            }           
         }
 
         #region Conversion
@@ -470,7 +485,7 @@ namespace VR_Interfaces_Project
             FindFigures(contours, rectangles, area, typeof(RotatedRect));
             FilterRectangles(rectangles);
 
-            label1.Text = rectangles.Count().ToString();
+            label1.Text = ((int)Math.Sqrt(rectangles.Count())).ToString();
 
             DrawRectangles(cannyImg, out rectangleImg, rectangles, c, f, fontsize, thickness);
             return rectangleImg;
@@ -527,6 +542,37 @@ namespace VR_Interfaces_Project
                 if (ckbxShowLabels.Checked)
                 {
                     CvInvoke.PutText(rectangleImg, SetLabel("Rect", r), Point.Round(r.Center), f, fontsize, new Bgr(c).MCvScalar, thickness);
+                }
+            }
+
+            if (tcTabs.SelectedTab == tpGame && !mGame.HasInitialized)
+            {
+                try
+                {
+                    decimal square = (decimal)(Math.Sqrt(rectangles.Count));
+                    WriteInfoToDisplay(rtbGameInfo, "Number of fields " + square);
+
+                    if (square == numWidth.Value)
+                    {
+                        byte currentRect = 0;
+                        byte numRows = (byte)(Math.Sqrt(rectangles.Count));
+
+                        mGame = new Game(numWidth.Value, numHeight.Value, this);
+                        rects = new RotatedRect[numRows, numRows];
+
+                        for (byte i = 0; i < numRows; i++)
+                        {
+                            for (byte j = 0; j < numRows; j++)
+                            {
+                                rects[i, j] = rectangles[currentRect];
+                                currentRect++;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
                 }
             }
         }
@@ -606,6 +652,37 @@ namespace VR_Interfaces_Project
                                                  countWrittenToDisplay, text);
             countWrittenToDisplay++;
         }
+
+        private void rbAndroid_CheckedChanged(object sender, EventArgs e)
+        {
+            Release();
+
+            if (mIsRunning)
+            {
+                if (sender.Equals(rbAndroid))
+                {
+                    try
+                    {
+                        mCapture = new Capture(ANDROIDWEBCAM);
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
+                    }
+                }
+                else if (sender.Equals(rbPCWebcam))
+                {
+                    try
+                    {
+                        mCapture = new Capture(PCWEBCAM);
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Game Logic
@@ -614,7 +691,7 @@ namespace VR_Interfaces_Project
             try
             {
                 mGame = new Game(numWidth.Value, numHeight.Value, this);
-                mGame.InitializeGame();
+                //mGame.InitializeGame();
 
                 WriteInfoToDisplay(rtbGameInfo, "Set game to: " + numWidth.Value + " by " + numHeight.Value);
             }

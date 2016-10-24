@@ -11,10 +11,13 @@ namespace VR_Interfaces_Project
     public class Game
     {
         private decimal _gameWidth, _gameHeight;
-        private bool _hasWon;
+        private bool _hasWon, _hasInitialzed;
 
         private Button[,] _grid;
         private readonly IFrmGame form;
+
+        // default constructor
+        public Game() { }
 
         public Game(decimal width, decimal height, IFrmGame form)
         {
@@ -45,6 +48,11 @@ namespace VR_Interfaces_Project
             set { _hasWon = value; }
         }
 
+        public bool HasInitialized
+        {
+            get { return _hasInitialzed; }
+        }
+
         public void InitializeGame()
         {
             byte counter = 1;
@@ -68,6 +76,8 @@ namespace VR_Interfaces_Project
                     counter++;
                 }
             }
+
+            _hasInitialzed = true;
         }
     }
 }

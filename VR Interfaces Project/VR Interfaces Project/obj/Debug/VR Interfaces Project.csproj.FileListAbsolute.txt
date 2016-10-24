@@ -21,3 +21,24 @@ C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\VR 
 C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.Video.dll
 C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.xml
 C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.Video.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\VR Interfaces Project.exe.config
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\VR Interfaces Project.exe
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\VR Interfaces Project.pdb
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.dll
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.Video.dll
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\ZedGraph.dll
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\AForge.Video.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\Emgu.CV.UI.pdb
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\Emgu.CV.UI.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\Emgu.CV.World.pdb
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\Emgu.CV.World.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\ZedGraph.xml
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\zh-CN\Emgu.CV.UI.resources.dll
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\bin\Debug\zh-CN\ZedGraph.resources.dll
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR Interfaces Project.csprojResolveAssemblyReference.cache
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR_Interfaces_Project.frmVRInterfaces.resources
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR_Interfaces_Project.Properties.Resources.resources
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR Interfaces Project.csproj.GenerateResource.Cache
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR Interfaces Project.exe
+C:\Users\Kevin Stollaerd\Desktop\Projecten\KdG\P1\Virtual Reality Interfaces\Virtual-Reality-Interfaces\VR Interfaces Project\VR Interfaces Project\obj\Debug\VR Interfaces Project.pdb

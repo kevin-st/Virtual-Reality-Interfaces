@@ -36,6 +36,9 @@
             this.lblBaudrate = new System.Windows.Forms.Label();
             this.tcTabs = new System.Windows.Forms.TabControl();
             this.tpSettings = new System.Windows.Forms.TabPage();
+            this.gbCameraSettings = new System.Windows.Forms.GroupBox();
+            this.rbAndroid = new System.Windows.Forms.RadioButton();
+            this.rbPCWebcam = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.gbPrevInfo = new System.Windows.Forms.GroupBox();
             this.rtbPreviewInfo = new System.Windows.Forms.RichTextBox();
@@ -93,12 +96,9 @@
             this.bttnStart = new System.Windows.Forms.Button();
             this.bttnStop = new System.Windows.Forms.Button();
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.rbPCWebcam = new System.Windows.Forms.RadioButton();
-            this.rbAndroid = new System.Windows.Forms.RadioButton();
-            this.tbStreamURL = new System.Windows.Forms.TextBox();
-            this.lblStreamURL = new System.Windows.Forms.Label();
             this.tcTabs.SuspendLayout();
             this.tpSettings.SuspendLayout();
+            this.gbCameraSettings.SuspendLayout();
             this.gbPrevInfo.SuspendLayout();
             this.gbParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAcumulatorThresh)).BeginInit();
@@ -187,6 +187,7 @@
             // tpSettings
             // 
             this.tpSettings.BackColor = System.Drawing.Color.Transparent;
+            this.tpSettings.Controls.Add(this.gbCameraSettings);
             this.tpSettings.Controls.Add(this.label1);
             this.tpSettings.Controls.Add(this.gbPrevInfo);
             this.tpSettings.Controls.Add(this.gbParameters);
@@ -205,6 +206,41 @@
             this.tpSettings.TabIndex = 0;
             this.tpSettings.Text = "Settings";
             // 
+            // gbCameraSettings
+            // 
+            this.gbCameraSettings.Controls.Add(this.rbAndroid);
+            this.gbCameraSettings.Controls.Add(this.rbPCWebcam);
+            this.gbCameraSettings.Location = new System.Drawing.Point(290, 378);
+            this.gbCameraSettings.Name = "gbCameraSettings";
+            this.gbCameraSettings.Size = new System.Drawing.Size(407, 108);
+            this.gbCameraSettings.TabIndex = 7;
+            this.gbCameraSettings.TabStop = false;
+            this.gbCameraSettings.Text = "Camera Settings";
+            // 
+            // rbAndroid
+            // 
+            this.rbAndroid.AutoSize = true;
+            this.rbAndroid.Location = new System.Drawing.Point(10, 57);
+            this.rbAndroid.Name = "rbAndroid";
+            this.rbAndroid.Size = new System.Drawing.Size(61, 17);
+            this.rbAndroid.TabIndex = 0;
+            this.rbAndroid.Text = "Android";
+            this.rbAndroid.UseVisualStyleBackColor = true;
+            this.rbAndroid.CheckedChanged += new System.EventHandler(this.rbAndroid_CheckedChanged);
+            // 
+            // rbPCWebcam
+            // 
+            this.rbPCWebcam.AutoSize = true;
+            this.rbPCWebcam.Checked = true;
+            this.rbPCWebcam.Location = new System.Drawing.Point(10, 30);
+            this.rbPCWebcam.Name = "rbPCWebcam";
+            this.rbPCWebcam.Size = new System.Drawing.Size(85, 17);
+            this.rbPCWebcam.TabIndex = 0;
+            this.rbPCWebcam.TabStop = true;
+            this.rbPCWebcam.Text = "PC Webcam";
+            this.rbPCWebcam.UseVisualStyleBackColor = true;
+            this.rbPCWebcam.CheckedChanged += new System.EventHandler(this.rbAndroid_CheckedChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -219,7 +255,7 @@
             this.gbPrevInfo.Controls.Add(this.rtbPreviewInfo);
             this.gbPrevInfo.Location = new System.Drawing.Point(291, 202);
             this.gbPrevInfo.Name = "gbPrevInfo";
-            this.gbPrevInfo.Size = new System.Drawing.Size(406, 278);
+            this.gbPrevInfo.Size = new System.Drawing.Size(406, 169);
             this.gbPrevInfo.TabIndex = 5;
             this.gbPrevInfo.TabStop = false;
             this.gbPrevInfo.Text = "Preview information";
@@ -230,7 +266,7 @@
             this.rtbPreviewInfo.Location = new System.Drawing.Point(9, 19);
             this.rtbPreviewInfo.Name = "rtbPreviewInfo";
             this.rtbPreviewInfo.ReadOnly = true;
-            this.rtbPreviewInfo.Size = new System.Drawing.Size(384, 253);
+            this.rtbPreviewInfo.Size = new System.Drawing.Size(384, 144);
             this.rtbPreviewInfo.TabIndex = 0;
             this.rtbPreviewInfo.Text = "";
             // 
@@ -905,34 +941,6 @@
             this.bttnStop.UseVisualStyleBackColor = true;
             this.bttnStop.Click += new System.EventHandler(this.bttnStop_Click);
             // 
-            // rbPCWebcam
-            // 
-            this.rbPCWebcam.Location = new System.Drawing.Point(0, 0);
-            this.rbPCWebcam.Name = "rbPCWebcam";
-            this.rbPCWebcam.Size = new System.Drawing.Size(104, 24);
-            this.rbPCWebcam.TabIndex = 0;
-            // 
-            // rbAndroid
-            // 
-            this.rbAndroid.Location = new System.Drawing.Point(0, 0);
-            this.rbAndroid.Name = "rbAndroid";
-            this.rbAndroid.Size = new System.Drawing.Size(104, 24);
-            this.rbAndroid.TabIndex = 0;
-            // 
-            // tbStreamURL
-            // 
-            this.tbStreamURL.Location = new System.Drawing.Point(0, 0);
-            this.tbStreamURL.Name = "tbStreamURL";
-            this.tbStreamURL.Size = new System.Drawing.Size(100, 20);
-            this.tbStreamURL.TabIndex = 0;
-            // 
-            // lblStreamURL
-            // 
-            this.lblStreamURL.Location = new System.Drawing.Point(0, 0);
-            this.lblStreamURL.Name = "lblStreamURL";
-            this.lblStreamURL.Size = new System.Drawing.Size(100, 23);
-            this.lblStreamURL.TabIndex = 0;
-            // 
             // frmVRInterfaces
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -947,6 +955,8 @@
             this.tcTabs.ResumeLayout(false);
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
+            this.gbCameraSettings.ResumeLayout(false);
+            this.gbCameraSettings.PerformLayout();
             this.gbPrevInfo.ResumeLayout(false);
             this.gbParameters.ResumeLayout(false);
             this.gbParameters.PerformLayout();
@@ -1043,10 +1053,9 @@
         private System.Windows.Forms.GroupBox gbGameInfo;
         private System.Windows.Forms.RichTextBox rtbGameInfo;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblStreamURL;
-        private System.Windows.Forms.TextBox tbStreamURL;
-        private System.Windows.Forms.RadioButton rbAndroid;
+        private System.Windows.Forms.GroupBox gbCameraSettings;
         private System.Windows.Forms.RadioButton rbPCWebcam;
+        private System.Windows.Forms.RadioButton rbAndroid;
     }
 }
 
