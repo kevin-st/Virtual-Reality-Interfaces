@@ -88,6 +88,7 @@
             this.ibFilterView = new Emgu.CV.UI.ImageBox();
             this.ibCamView = new Emgu.CV.UI.ImageBox();
             this.gbGameSettings = new System.Windows.Forms.GroupBox();
+            this.bttnStopGame = new System.Windows.Forms.Button();
             this.bttnSetGame = new System.Windows.Forms.Button();
             this.lblTiles = new System.Windows.Forms.Label();
             this.lblBy = new System.Windows.Forms.Label();
@@ -96,6 +97,7 @@
             this.bttnStart = new System.Windows.Forms.Button();
             this.bttnStop = new System.Windows.Forms.Button();
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.bttnClear = new System.Windows.Forms.Button();
             this.tcTabs.SuspendLayout();
             this.tpSettings.SuspendLayout();
             this.gbCameraSettings.SuspendLayout();
@@ -836,6 +838,7 @@
             // 
             // gbGameSettings
             // 
+            this.gbGameSettings.Controls.Add(this.bttnStopGame);
             this.gbGameSettings.Controls.Add(this.bttnSetGame);
             this.gbGameSettings.Controls.Add(this.lblTiles);
             this.gbGameSettings.Controls.Add(this.lblBy);
@@ -848,10 +851,22 @@
             this.gbGameSettings.TabStop = false;
             this.gbGameSettings.Text = "Game Settings";
             // 
+            // bttnStopGame
+            // 
+            this.bttnStopGame.BackColor = System.Drawing.Color.Transparent;
+            this.bttnStopGame.Enabled = false;
+            this.bttnStopGame.Location = new System.Drawing.Point(196, 93);
+            this.bttnStopGame.Name = "bttnStopGame";
+            this.bttnStopGame.Size = new System.Drawing.Size(75, 23);
+            this.bttnStopGame.TabIndex = 8;
+            this.bttnStopGame.Text = "Stop Game";
+            this.bttnStopGame.UseVisualStyleBackColor = false;
+            this.bttnStopGame.Click += new System.EventHandler(this.bttnStopGame_Click);
+            // 
             // bttnSetGame
             // 
             this.bttnSetGame.BackColor = System.Drawing.Color.Transparent;
-            this.bttnSetGame.Location = new System.Drawing.Point(199, 93);
+            this.bttnSetGame.Location = new System.Drawing.Point(116, 93);
             this.bttnSetGame.Name = "bttnSetGame";
             this.bttnSetGame.Size = new System.Drawing.Size(75, 23);
             this.bttnSetGame.TabIndex = 8;
@@ -941,12 +956,23 @@
             this.bttnStop.UseVisualStyleBackColor = true;
             this.bttnStop.Click += new System.EventHandler(this.bttnStop_Click);
             // 
+            // bttnClear
+            // 
+            this.bttnClear.Location = new System.Drawing.Point(910, 539);
+            this.bttnClear.Name = "bttnClear";
+            this.bttnClear.Size = new System.Drawing.Size(75, 23);
+            this.bttnClear.TabIndex = 3;
+            this.bttnClear.Text = "Clear";
+            this.bttnClear.UseVisualStyleBackColor = true;
+            this.bttnClear.Click += new System.EventHandler(this.bttnClear_Click);
+            // 
             // frmVRInterfaces
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1161, 574);
             this.Controls.Add(this.bttnStop);
+            this.Controls.Add(this.bttnClear);
             this.Controls.Add(this.bttnStart);
             this.Controls.Add(this.tcTabs);
             this.Name = "frmVRInterfaces";
@@ -1056,6 +1082,8 @@
         private System.Windows.Forms.GroupBox gbCameraSettings;
         private System.Windows.Forms.RadioButton rbPCWebcam;
         private System.Windows.Forms.RadioButton rbAndroid;
+        private System.Windows.Forms.Button bttnStopGame;
+        private System.Windows.Forms.Button bttnClear;
     }
 }
 

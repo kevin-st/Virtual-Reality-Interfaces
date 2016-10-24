@@ -53,6 +53,9 @@ namespace VR_Interfaces_Project
             get { return _hasInitialzed; }
         }
 
+        /// <summary>
+        /// Initializes a new game and adds the button controls to the game view.
+        /// </summary>
         public void InitializeGame()
         {
             byte counter = 1;
@@ -78,6 +81,23 @@ namespace VR_Interfaces_Project
             }
 
             _hasInitialzed = true;
+        }
+
+        /// <summary>
+        /// Resets the game view
+        /// </summary>
+        public void ResetGameView()
+        {
+            for(byte i = 0; i < _gameHeight; i++)
+            {
+                for (byte j = 0; j <_gameWidth; j++)
+                {
+                    form.GameView.Controls.Remove(_grid[i, j]);
+                    _grid[i, j] = null;
+                }
+            }
+
+            _grid = null;
         }
     }
 }

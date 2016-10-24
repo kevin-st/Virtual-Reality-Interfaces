@@ -170,9 +170,14 @@ namespace VR_Interfaces_Project
 
                     WriteInfoToDisplay(rtbPreviewInfo, "Succesfully closed " + cbPorts.SelectedItem + "!");
 
-                    mGame = null;
+                    // reset game view
+                    if (mGame != null)
+                    {
+                        mGame.ResetGameView();
+                    }
 
-                    WriteInfoToDisplay(rtbGameInfo, "Game stopped! Result: " + mGame.HasWon);
+                    mGame = null;
+                    WriteInfoToDisplay(rtbGameInfo, "Game stopped! Result: " + (mGame.HasWon ? "Player Won!" : "PC Won!"));
                 }
             }
             catch (Exception ex)
@@ -245,8 +250,11 @@ namespace VR_Interfaces_Project
             if (mCapture != null)
             {
                 mCapture.Dispose();
+
+                // reset image views
                 ibPreview.Image = null;
-            }           
+                ibCamView.Image = null;
+            }
         }
 
         #region Conversion
@@ -545,29 +553,36 @@ namespace VR_Interfaces_Project
                 }
             }
 
+            InitializeGameField(rectangles);
+        }
+
+        private void InitializeGameField(List<dynamic> rectangles)
+        {
             if (tcTabs.SelectedTab == tpGame && !mGame.HasInitialized)
             {
                 try
                 {
-                    decimal square = (decimal)(Math.Sqrt(rectangles.Count));
-                    WriteInfoToDisplay(rtbGameInfo, "Number of fields " + square);
+                    int square = (int)(Math.Sqrt(rectangles.Count));
 
                     if (square == numWidth.Value)
                     {
+                        WriteInfoToDisplay(rtbGameInfo, "Number of fields " + square);
+                        WriteInfoToDisplay(rtbGameInfo, "Adding fields to array.");
                         byte currentRect = 0;
-                        byte numRows = (byte)(Math.Sqrt(rectangles.Count));
 
                         mGame = new Game(numWidth.Value, numHeight.Value, this);
-                        rects = new RotatedRect[numRows, numRows];
+                        rects = new RotatedRect[square, square];
 
-                        for (byte i = 0; i < numRows; i++)
+                        for (byte i = 0; i < square; i++)
                         {
-                            for (byte j = 0; j < numRows; j++)
+                            for (byte j = 0; j < square; j++)
                             {
                                 rects[i, j] = rectangles[currentRect];
                                 currentRect++;
                             }
                         }
+
+                        mGame.InitializeGame();
                     }
                 }
                 catch (Exception ex)
@@ -691,7 +706,11 @@ namespace VR_Interfaces_Project
             try
             {
                 mGame = new Game(numWidth.Value, numHeight.Value, this);
-                //mGame.InitializeGame();
+
+                numWidth.Enabled = false;
+                numHeight.Enabled = false;
+                ((Button)sender).Enabled = false;
+                bttnStopGame.Enabled = true;
 
                 WriteInfoToDisplay(rtbGameInfo, "Set game to: " + numWidth.Value + " by " + numHeight.Value);
             }
@@ -699,6 +718,27 @@ namespace VR_Interfaces_Project
             {
                 WriteInfoToDisplay(rtbGameInfo, ex.GetType() + ": " + ex.Message);
             }
+        }
+
+        private void bttnClear_Click(object sender, EventArgs e)
+        {
+            if(rtbGameInfo.Text != string.Empty || rtbPreviewInfo.Text != string.Empty)
+            {
+                rtbGameInfo.Clear();
+                rtbPreviewInfo.Clear();
+            }
+        }
+
+        private void bttnStopGame_Click(object sender, EventArgs e)
+        {
+            mGame = null;
+
+            WriteInfoToDisplay(rtbGameInfo, "Game stopped.");
+
+            numWidth.Enabled = true;
+            numHeight.Enabled = true;
+            ((Button)sender).Enabled = false;
+            bttnSetGame.Enabled = true;
         }
         #endregion
     }
