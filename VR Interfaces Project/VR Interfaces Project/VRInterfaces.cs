@@ -122,34 +122,41 @@ namespace VR_Interfaces_Project
         /// <param name="e"></param>
         private void bttnStart_Click(object sender, EventArgs e)
         {
-            AccessCamera();
+            if (mGame != null && cbPorts.SelectedItem != null)
+            {
+                AccessCamera();
 
-            port = new SerialPort();
+                port = new SerialPort();
 
-            try
-            {
-                port = new SerialPort(cbPorts.SelectedItem.ToString(), int.Parse(cbBaudrates.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
-                port.DtrEnable = true;
-                port.Open();
-            }
-            catch (Exception ex)
-            {
-                WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
-            }
-            finally
-            {
-                if (port.IsOpen)
+                try
                 {
-                    WriteInfoToDisplay(rtbPreviewInfo, "Succeeded opening " + cbPorts.SelectedItem + "!");
-                    mIsRunning = true;
-                    bttnStart.Enabled = false;
-                    bttnStop.Enabled = true;
+                    port = new SerialPort(cbPorts.SelectedItem.ToString(), int.Parse(cbBaudrates.SelectedItem.ToString()), Parity.None, 8, StopBits.One);
+                    port.DtrEnable = true;
+                    port.Open();
                 }
-            }
+                catch (Exception ex)
+                {
+                    WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
+                }
+                finally
+                {
+                    if (port.IsOpen)
+                    {
+                        WriteInfoToDisplay(rtbPreviewInfo, "Succeeded opening " + cbPorts.SelectedItem + "!");
+                        mIsRunning = true;
+                        bttnStart.Enabled = false;
+                        bttnStop.Enabled = true;
+                    }
+                }
 
-            // The application lets the webcam catch the images
-            // and put them in the imagebox
-            Application.Idle += ProcessFrame;
+                // The application lets the webcam catch the images
+                // and put them in the imagebox
+                Application.Idle += ProcessFrame;
+            }
+            else
+            {
+                MessageBox.Show("Check first if:\r\n1) You have set a new game\r\n2) You have selected a COM port", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         /// <summary>
@@ -167,6 +174,7 @@ namespace VR_Interfaces_Project
 
                     bttnStop.Enabled = false;
                     bttnStart.Enabled = true;
+                    bttnStopGame.Enabled = true;
 
                     WriteInfoToDisplay(rtbPreviewInfo, "Succesfully closed " + cbPorts.SelectedItem + "!");
 
@@ -176,7 +184,6 @@ namespace VR_Interfaces_Project
                         mGame.ResetGameView();
                     }
 
-                    mGame = null;
                     WriteInfoToDisplay(rtbGameInfo, "Game stopped! Result: " + (mGame.HasWon ? "Player Won!" : "PC Won!"));
                 }
             }
@@ -196,49 +203,81 @@ namespace VR_Interfaces_Project
             ApplyImg(img);
         }
 
+        /// <summary>
+        /// Applies the captured image to an imagebox.
+        /// </summary>
+        /// <param name="image">The image to be applied.</param>
         private void ApplyImg(Mat image)
         {
-            Mat endImg = new Mat();
-
             if (image != null)
             {
-                if (rbBgr.Checked)
+                if (tcTabs.SelectedTab == tpSettings)
                 {
-                    // Do nothing with the original image
-                    // So just put it in the endImg variable
-                    endImg = image;
-                }
+                    Mat endImg = new Mat();
 
-                if (rbGray.Checked)
+                    if (rbBgr.Checked)
+                    {
+                        // Do nothing with the original image
+                        // So just put it in the endImg variable
+                        endImg = image;
+                    }
+
+                    if (rbGray.Checked)
+                    {
+                        endImg = ConvertToGray(image);
+                    }
+
+                    if (rbCanny.Checked)
+                    {
+                        endImg = ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value);
+                    }
+
+                    if (rbGrid.Checked)
+                    {
+                        endImg = DetectRectangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                    }
+
+                    if (rbCircle.Checked)
+                    {
+                        endImg = DetectCircles(ConvertToGray(image), tbCannyThresh.Value, tbAcumulatorThresh.Value, (double)numDp.Value, (double)numMinDist.Value, (int)numMinRadius.Value, Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (int)numThickness.Value);
+                    }
+
+                    if (rbTriangle.Checked)
+                    {
+                        endImg = DetectTriangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                    }
+
+                    // Put the endImg in the preview imagebox
+                    ibPreview.Image = endImg;
+                }
+                else if (tcTabs.SelectedTab == tpGame)
                 {
-                    endImg = ConvertToGray(image);
+                    Mat rectangleImg = new Mat();
+                    Mat triangleImg = new Mat();
+                    Mat circleImg = new Mat();
+                    Mat endImg = image;
+
+                    if (ckbxRectangles.Checked)
+                    {
+                        rectangleImg = DetectRectangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                        CvInvoke.AddWeighted(endImg, 1.0, rectangleImg, 1.0, 0.0, endImg);
+                    }
+
+                    if (ckbxTriangles.Checked)
+                    {
+                        triangleImg = DetectTriangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
+                        CvInvoke.AddWeighted(endImg, 1.0, triangleImg, 1.0, 0.0, endImg);
+                    }
+
+                    if (ckbxCircles.Checked)
+                    {
+                        circleImg = DetectCircles(ConvertToGray(image), tbCannyThresh.Value, tbAcumulatorThresh.Value, (double)numDp.Value, (double)numMinDist.Value, (int)numMinRadius.Value, Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (int)numThickness.Value);
+                        CvInvoke.AddWeighted(endImg, 1.0, circleImg, 1.0, 0.0, endImg);
+                    }
+
+                    // Put the endImg in the camera viewbox
+                    ibCamView.Image = endImg;
                 }
-
-                if (rbCanny.Checked)
-                {
-                    endImg = ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value);
-                }
-
-                if (rbGrid.Checked)
-                {
-                    endImg = DetectRectangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
-                }
-
-                if (rbCircle.Checked)
-                {
-                    endImg = DetectCircles(ConvertToGray(image), tbCannyThresh.Value, tbAcumulatorThresh.Value, (double)numDp.Value, (double)numMinDist.Value, (int)numMinRadius.Value, Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (int)numThickness.Value);
-                }
-
-                if (rbTriangle.Checked)
-                {
-                    endImg = DetectTriangles(ConvertToCanny(image, tbMinThresh.Value, tbMaxThresh.Value), Color.FromName(cbColors.SelectedItem.ToString()), (FontFace)cbFonts.SelectedValue, (double)numSize.Value, (double)numArea.Value, (int)numThickness.Value);
-                }
-
-                // Put the original img in the camera viewbox
-                ibCamView.Image = image;
-
-                // Put the endIg in the imagebox
-                ibPreview.Image = endImg;
             }
         }
 
@@ -493,7 +532,7 @@ namespace VR_Interfaces_Project
             FindFigures(contours, rectangles, area, typeof(RotatedRect));
             FilterRectangles(rectangles);
 
-            label1.Text = ((int)Math.Sqrt(rectangles.Count())).ToString();
+            label1.Text = rectangles.Count().ToString();
 
             DrawRectangles(cannyImg, out rectangleImg, rectangles, c, f, fontsize, thickness);
             return rectangleImg;
@@ -558,17 +597,19 @@ namespace VR_Interfaces_Project
 
         private void InitializeGameField(List<dynamic> rectangles)
         {
-            if (tcTabs.SelectedTab == tpGame && !mGame.HasInitialized)
+            try
             {
-                try
+                if (tcTabs.SelectedTab == tpGame && !mGame.HasInitialized)
                 {
-                    int square = (int)(Math.Sqrt(rectangles.Count));
+                    byte numRectangles = (byte)rectangles.Count();
 
-                    if (square == numWidth.Value)
+                    if (numRectangles == (numWidth.Value * numHeight.Value))
                     {
-                        WriteInfoToDisplay(rtbGameInfo, "Number of fields " + square);
+                        WriteInfoToDisplay(rtbGameInfo, "Number of fields " + numRectangles);
                         WriteInfoToDisplay(rtbGameInfo, "Adding fields to array.");
+
                         byte currentRect = 0;
+                        byte square = (byte)Math.Sqrt(numRectangles);
 
                         mGame = new Game(numWidth.Value, numHeight.Value, this);
                         rects = new RotatedRect[square, square];
@@ -585,10 +626,10 @@ namespace VR_Interfaces_Project
                         mGame.InitializeGame();
                     }
                 }
-                catch (Exception ex)
-                {
-                    WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
-                }
+            }
+            catch(Exception ex)
+            {
+                WriteInfoToDisplay(rtbPreviewInfo, ex.GetType() + ": " + ex.Message);
             }
         }
 
@@ -701,6 +742,11 @@ namespace VR_Interfaces_Project
         #endregion
 
         #region Game Logic
+        /// <summary>
+        /// Before starting the webcam feed, set a new game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnSetGame_Click(object sender, EventArgs e)
         {
             try
@@ -710,7 +756,6 @@ namespace VR_Interfaces_Project
                 numWidth.Enabled = false;
                 numHeight.Enabled = false;
                 ((Button)sender).Enabled = false;
-                bttnStopGame.Enabled = true;
 
                 WriteInfoToDisplay(rtbGameInfo, "Set game to: " + numWidth.Value + " by " + numHeight.Value);
             }
@@ -720,6 +765,11 @@ namespace VR_Interfaces_Project
             }
         }
 
+        /// <summary>
+        /// Clear the infoboxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnClear_Click(object sender, EventArgs e)
         {
             if(rtbGameInfo.Text != string.Empty || rtbPreviewInfo.Text != string.Empty)
@@ -729,6 +779,11 @@ namespace VR_Interfaces_Project
             }
         }
 
+        /// <summary>
+        /// Stop the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnStopGame_Click(object sender, EventArgs e)
         {
             mGame = null;

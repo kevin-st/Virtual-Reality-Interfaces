@@ -83,9 +83,7 @@
             this.rtbGameInfo = new System.Windows.Forms.RichTextBox();
             this.pnlGameView = new System.Windows.Forms.Panel();
             this.lblGameView = new System.Windows.Forms.Label();
-            this.lblFilterView = new System.Windows.Forms.Label();
             this.lblCamView = new System.Windows.Forms.Label();
-            this.ibFilterView = new Emgu.CV.UI.ImageBox();
             this.ibCamView = new Emgu.CV.UI.ImageBox();
             this.gbGameSettings = new System.Windows.Forms.GroupBox();
             this.bttnStopGame = new System.Windows.Forms.Button();
@@ -98,6 +96,10 @@
             this.bttnStop = new System.Windows.Forms.Button();
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
             this.bttnClear = new System.Windows.Forms.Button();
+            this.ckbxRectangles = new System.Windows.Forms.CheckBox();
+            this.ckbxCircles = new System.Windows.Forms.CheckBox();
+            this.ckbxTriangles = new System.Windows.Forms.CheckBox();
+            this.lblTrackFigures = new System.Windows.Forms.Label();
             this.tcTabs.SuspendLayout();
             this.tpSettings.SuspendLayout();
             this.gbCameraSettings.SuspendLayout();
@@ -118,7 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ibPreview)).BeginInit();
             this.tpGame.SuspendLayout();
             this.gbGameInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibFilterView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ibCamView)).BeginInit();
             this.gbGameSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
@@ -749,9 +750,7 @@
             this.tpGame.Controls.Add(this.gbGameInfo);
             this.tpGame.Controls.Add(this.pnlGameView);
             this.tpGame.Controls.Add(this.lblGameView);
-            this.tpGame.Controls.Add(this.lblFilterView);
             this.tpGame.Controls.Add(this.lblCamView);
-            this.tpGame.Controls.Add(this.ibFilterView);
             this.tpGame.Controls.Add(this.ibCamView);
             this.tpGame.Controls.Add(this.gbGameSettings);
             this.tpGame.Location = new System.Drawing.Point(4, 25);
@@ -765,9 +764,9 @@
             // gbGameInfo
             // 
             this.gbGameInfo.Controls.Add(this.rtbGameInfo);
-            this.gbGameInfo.Location = new System.Drawing.Point(848, 179);
+            this.gbGameInfo.Location = new System.Drawing.Point(848, 191);
             this.gbGameInfo.Name = "gbGameInfo";
-            this.gbGameInfo.Size = new System.Drawing.Size(274, 286);
+            this.gbGameInfo.Size = new System.Drawing.Size(274, 274);
             this.gbGameInfo.TabIndex = 9;
             this.gbGameInfo.TabStop = false;
             this.gbGameInfo.Text = "Game Information";
@@ -779,7 +778,7 @@
             this.rtbGameInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbGameInfo.Location = new System.Drawing.Point(3, 16);
             this.rtbGameInfo.Name = "rtbGameInfo";
-            this.rtbGameInfo.Size = new System.Drawing.Size(268, 267);
+            this.rtbGameInfo.Size = new System.Drawing.Size(268, 255);
             this.rtbGameInfo.TabIndex = 0;
             this.rtbGameInfo.Text = "";
             // 
@@ -800,15 +799,6 @@
             this.lblGameView.TabIndex = 3;
             this.lblGameView.Text = "Game view:";
             // 
-            // lblFilterView
-            // 
-            this.lblFilterView.AutoSize = true;
-            this.lblFilterView.Location = new System.Drawing.Point(3, 250);
-            this.lblFilterView.Name = "lblFilterView";
-            this.lblFilterView.Size = new System.Drawing.Size(57, 13);
-            this.lblFilterView.TabIndex = 3;
-            this.lblFilterView.Text = "Filter view:";
-            // 
             // lblCamView
             // 
             this.lblCamView.AutoSize = true;
@@ -818,26 +808,21 @@
             this.lblCamView.TabIndex = 3;
             this.lblCamView.Text = "Camera view:";
             // 
-            // ibFilterView
-            // 
-            this.ibFilterView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ibFilterView.Location = new System.Drawing.Point(6, 266);
-            this.ibFilterView.Name = "ibFilterView";
-            this.ibFilterView.Size = new System.Drawing.Size(378, 199);
-            this.ibFilterView.TabIndex = 2;
-            this.ibFilterView.TabStop = false;
-            // 
             // ibCamView
             // 
             this.ibCamView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ibCamView.Location = new System.Drawing.Point(6, 45);
             this.ibCamView.Name = "ibCamView";
-            this.ibCamView.Size = new System.Drawing.Size(378, 181);
+            this.ibCamView.Size = new System.Drawing.Size(378, 420);
             this.ibCamView.TabIndex = 2;
             this.ibCamView.TabStop = false;
             // 
             // gbGameSettings
             // 
+            this.gbGameSettings.Controls.Add(this.lblTrackFigures);
+            this.gbGameSettings.Controls.Add(this.ckbxTriangles);
+            this.gbGameSettings.Controls.Add(this.ckbxCircles);
+            this.gbGameSettings.Controls.Add(this.ckbxRectangles);
             this.gbGameSettings.Controls.Add(this.bttnStopGame);
             this.gbGameSettings.Controls.Add(this.bttnSetGame);
             this.gbGameSettings.Controls.Add(this.lblTiles);
@@ -846,7 +831,7 @@
             this.gbGameSettings.Controls.Add(this.numHeight);
             this.gbGameSettings.Location = new System.Drawing.Point(848, 39);
             this.gbGameSettings.Name = "gbGameSettings";
-            this.gbGameSettings.Size = new System.Drawing.Size(280, 122);
+            this.gbGameSettings.Size = new System.Drawing.Size(280, 146);
             this.gbGameSettings.TabIndex = 8;
             this.gbGameSettings.TabStop = false;
             this.gbGameSettings.Text = "Game Settings";
@@ -855,7 +840,7 @@
             // 
             this.bttnStopGame.BackColor = System.Drawing.Color.Transparent;
             this.bttnStopGame.Enabled = false;
-            this.bttnStopGame.Location = new System.Drawing.Point(196, 93);
+            this.bttnStopGame.Location = new System.Drawing.Point(196, 111);
             this.bttnStopGame.Name = "bttnStopGame";
             this.bttnStopGame.Size = new System.Drawing.Size(75, 23);
             this.bttnStopGame.TabIndex = 8;
@@ -866,7 +851,7 @@
             // bttnSetGame
             // 
             this.bttnSetGame.BackColor = System.Drawing.Color.Transparent;
-            this.bttnSetGame.Location = new System.Drawing.Point(116, 93);
+            this.bttnSetGame.Location = new System.Drawing.Point(116, 111);
             this.bttnSetGame.Name = "bttnSetGame";
             this.bttnSetGame.Size = new System.Drawing.Size(75, 23);
             this.bttnSetGame.TabIndex = 8;
@@ -966,6 +951,45 @@
             this.bttnClear.UseVisualStyleBackColor = true;
             this.bttnClear.Click += new System.EventHandler(this.bttnClear_Click);
             // 
+            // ckbxRectangles
+            // 
+            this.ckbxRectangles.AutoSize = true;
+            this.ckbxRectangles.Location = new System.Drawing.Point(14, 78);
+            this.ckbxRectangles.Name = "ckbxRectangles";
+            this.ckbxRectangles.Size = new System.Drawing.Size(80, 17);
+            this.ckbxRectangles.TabIndex = 9;
+            this.ckbxRectangles.Text = "Rectangles";
+            this.ckbxRectangles.UseVisualStyleBackColor = true;
+            // 
+            // ckbxCircles
+            // 
+            this.ckbxCircles.AutoSize = true;
+            this.ckbxCircles.Location = new System.Drawing.Point(116, 78);
+            this.ckbxCircles.Name = "ckbxCircles";
+            this.ckbxCircles.Size = new System.Drawing.Size(57, 17);
+            this.ckbxCircles.TabIndex = 9;
+            this.ckbxCircles.Text = "Circles";
+            this.ckbxCircles.UseVisualStyleBackColor = true;
+            // 
+            // ckbxTriangles
+            // 
+            this.ckbxTriangles.AutoSize = true;
+            this.ckbxTriangles.Location = new System.Drawing.Point(202, 78);
+            this.ckbxTriangles.Name = "ckbxTriangles";
+            this.ckbxTriangles.Size = new System.Drawing.Size(69, 17);
+            this.ckbxTriangles.TabIndex = 9;
+            this.ckbxTriangles.Text = "Triangles";
+            this.ckbxTriangles.UseVisualStyleBackColor = true;
+            // 
+            // lblTrackFigures
+            // 
+            this.lblTrackFigures.AutoSize = true;
+            this.lblTrackFigures.Location = new System.Drawing.Point(11, 57);
+            this.lblTrackFigures.Name = "lblTrackFigures";
+            this.lblTrackFigures.Size = new System.Drawing.Size(75, 13);
+            this.lblTrackFigures.TabIndex = 0;
+            this.lblTrackFigures.Text = "Track Figures:";
+            // 
             // frmVRInterfaces
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1004,7 +1028,6 @@
             this.tpGame.ResumeLayout(false);
             this.tpGame.PerformLayout();
             this.gbGameInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ibFilterView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ibCamView)).EndInit();
             this.gbGameSettings.ResumeLayout(false);
             this.gbGameSettings.PerformLayout();
@@ -1067,8 +1090,6 @@
         private System.Windows.Forms.Label lblGameView;
         private System.Windows.Forms.Label lblCamView;
         private Emgu.CV.UI.ImageBox ibCamView;
-        private System.Windows.Forms.Label lblFilterView;
-        private Emgu.CV.UI.ImageBox ibFilterView;
         private System.Windows.Forms.GroupBox gbGameSettings;
         private System.Windows.Forms.Label lblTiles;
         private System.Windows.Forms.Label lblBy;
@@ -1084,6 +1105,10 @@
         private System.Windows.Forms.RadioButton rbAndroid;
         private System.Windows.Forms.Button bttnStopGame;
         private System.Windows.Forms.Button bttnClear;
+        private System.Windows.Forms.CheckBox ckbxRectangles;
+        private System.Windows.Forms.Label lblTrackFigures;
+        private System.Windows.Forms.CheckBox ckbxTriangles;
+        private System.Windows.Forms.CheckBox ckbxCircles;
     }
 }
 

@@ -98,6 +98,7 @@ namespace VR_Interfaces_Project
             }
 
             _grid = null;
+            _hasInitialzed = false;
         }
     }
 }
