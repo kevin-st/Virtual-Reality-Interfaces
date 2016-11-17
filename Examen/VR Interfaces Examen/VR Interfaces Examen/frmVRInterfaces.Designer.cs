@@ -1,4 +1,4 @@
-﻿namespace VR_Interfaces_Project
+﻿namespace VR_Interfaces_Examen
 {
     partial class frmVRInterfaces
     {
@@ -29,17 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVRInterfaces));
-            this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.lblPoort = new System.Windows.Forms.Label();
-            this.cbBaudrates = new System.Windows.Forms.ComboBox();
-            this.lblBaudrate = new System.Windows.Forms.Label();
             this.tcTabs = new System.Windows.Forms.TabControl();
             this.tpSettings = new System.Windows.Forms.TabPage();
+            this.ibPreview = new Emgu.CV.UI.ImageBox();
             this.gbCameraSettings = new System.Windows.Forms.GroupBox();
             this.rbAndroid = new System.Windows.Forms.RadioButton();
             this.rbPCWebcam = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.gbPrevInfo = new System.Windows.Forms.GroupBox();
             this.rtbPreviewInfo = new System.Windows.Forms.RichTextBox();
             this.gbParameters = new System.Windows.Forms.GroupBox();
@@ -71,37 +66,35 @@
             this.lblMinThreshold = new System.Windows.Forms.Label();
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.rbCanny = new System.Windows.Forms.RadioButton();
-            this.rbTriangle = new System.Windows.Forms.RadioButton();
             this.rbCircle = new System.Windows.Forms.RadioButton();
-            this.rbGrid = new System.Windows.Forms.RadioButton();
             this.rbGray = new System.Windows.Forms.RadioButton();
             this.rbBgr = new System.Windows.Forms.RadioButton();
-            this.ibPreview = new Emgu.CV.UI.ImageBox();
             this.lblPreview = new System.Windows.Forms.Label();
+            this.lblBaudrate = new System.Windows.Forms.Label();
+            this.lblPoort = new System.Windows.Forms.Label();
+            this.cbBaudrates = new System.Windows.Forms.ComboBox();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
             this.tpGame = new System.Windows.Forms.TabPage();
+            this.ibCamView = new Emgu.CV.UI.ImageBox();
             this.gbGameInfo = new System.Windows.Forms.GroupBox();
             this.rtbGameInfo = new System.Windows.Forms.RichTextBox();
-            this.pnlGameView = new System.Windows.Forms.Panel();
-            this.lblGameView = new System.Windows.Forms.Label();
             this.lblCamView = new System.Windows.Forms.Label();
-            this.ibCamView = new Emgu.CV.UI.ImageBox();
             this.gbGameSettings = new System.Windows.Forms.GroupBox();
-            this.lblTrackFigures = new System.Windows.Forms.Label();
-            this.ckbxTriangles = new System.Windows.Forms.CheckBox();
+            this.lblPos2 = new System.Windows.Forms.Label();
+            this.lblPos1 = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
             this.ckbxCircles = new System.Windows.Forms.CheckBox();
-            this.ckbxRectangles = new System.Windows.Forms.CheckBox();
-            this.bttnStopGame = new System.Windows.Forms.Button();
-            this.bttnSetGame = new System.Windows.Forms.Button();
-            this.lblTiles = new System.Windows.Forms.Label();
-            this.lblBy = new System.Windows.Forms.Label();
-            this.numWidth = new System.Windows.Forms.NumericUpDown();
-            this.numHeight = new System.Windows.Forms.NumericUpDown();
-            this.bttnStart = new System.Windows.Forms.Button();
+            this.bttnReset = new System.Windows.Forms.Button();
+            this.bttnSetSecPos = new System.Windows.Forms.Button();
+            this.bttnSetPos = new System.Windows.Forms.Button();
+            this.nbSpeed = new System.Windows.Forms.NumericUpDown();
             this.bttnStop = new System.Windows.Forms.Button();
-            this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
             this.bttnClear = new System.Windows.Forms.Button();
+            this.bttnStart = new System.Windows.Forms.Button();
+            this.bttnSend = new System.Windows.Forms.Button();
             this.tcTabs.SuspendLayout();
             this.tpSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ibPreview)).BeginInit();
             this.gbCameraSettings.SuspendLayout();
             this.gbPrevInfo.SuspendLayout();
             this.gbParameters.SuspendLayout();
@@ -117,86 +110,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbMaxThresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMinThresh)).BeginInit();
             this.gbFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibPreview)).BeginInit();
             this.tpGame.SuspendLayout();
-            this.gbGameInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ibCamView)).BeginInit();
+            this.gbGameInfo.SuspendLayout();
             this.gbGameSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nbSpeed)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbPorts
-            // 
-            this.cbPorts.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.cbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPorts.FormattingEnabled = true;
-            this.cbPorts.Location = new System.Drawing.Point(47, 16);
-            this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(121, 21);
-            this.cbPorts.TabIndex = 0;
-            // 
-            // lblPoort
-            // 
-            this.lblPoort.AutoSize = true;
-            this.lblPoort.Location = new System.Drawing.Point(6, 16);
-            this.lblPoort.Name = "lblPoort";
-            this.lblPoort.Size = new System.Drawing.Size(35, 13);
-            this.lblPoort.TabIndex = 1;
-            this.lblPoort.Text = "Poort:";
-            // 
-            // cbBaudrates
-            // 
-            this.cbBaudrates.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.cbBaudrates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBaudrates.FormattingEnabled = true;
-            this.cbBaudrates.Items.AddRange(new object[] {
-            "300",
-            "600",
-            "1200",
-            "2400",
-            "4800",
-            "9600",
-            "14400",
-            "19200",
-            "28800",
-            "31250",
-            "38400"});
-            this.cbBaudrates.Location = new System.Drawing.Point(290, 16);
-            this.cbBaudrates.Name = "cbBaudrates";
-            this.cbBaudrates.Size = new System.Drawing.Size(121, 21);
-            this.cbBaudrates.TabIndex = 0;
-            // 
-            // lblBaudrate
-            // 
-            this.lblBaudrate.AutoSize = true;
-            this.lblBaudrate.Location = new System.Drawing.Point(231, 16);
-            this.lblBaudrate.Name = "lblBaudrate";
-            this.lblBaudrate.Size = new System.Drawing.Size(53, 13);
-            this.lblBaudrate.TabIndex = 1;
-            this.lblBaudrate.Text = "Baudrate:";
             // 
             // tcTabs
             // 
             this.tcTabs.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tcTabs.Controls.Add(this.tpSettings);
             this.tcTabs.Controls.Add(this.tpGame);
-            this.tcTabs.Location = new System.Drawing.Point(15, 12);
+            this.tcTabs.Location = new System.Drawing.Point(10, 27);
             this.tcTabs.Name = "tcTabs";
             this.tcTabs.SelectedIndex = 0;
             this.tcTabs.Size = new System.Drawing.Size(1140, 521);
-            this.tcTabs.TabIndex = 2;
+            this.tcTabs.TabIndex = 3;
             // 
             // tpSettings
             // 
             this.tpSettings.BackColor = System.Drawing.Color.Transparent;
+            this.tpSettings.Controls.Add(this.ibPreview);
             this.tpSettings.Controls.Add(this.gbCameraSettings);
-            this.tpSettings.Controls.Add(this.label1);
             this.tpSettings.Controls.Add(this.gbPrevInfo);
             this.tpSettings.Controls.Add(this.gbParameters);
             this.tpSettings.Controls.Add(this.gbThreshold);
             this.tpSettings.Controls.Add(this.gbFilter);
-            this.tpSettings.Controls.Add(this.ibPreview);
             this.tpSettings.Controls.Add(this.lblPreview);
             this.tpSettings.Controls.Add(this.lblBaudrate);
             this.tpSettings.Controls.Add(this.lblPoort);
@@ -208,6 +148,15 @@
             this.tpSettings.Size = new System.Drawing.Size(1132, 492);
             this.tpSettings.TabIndex = 0;
             this.tpSettings.Text = "Settings";
+            // 
+            // ibPreview
+            // 
+            this.ibPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ibPreview.Location = new System.Drawing.Point(703, 83);
+            this.ibPreview.Name = "ibPreview";
+            this.ibPreview.Size = new System.Drawing.Size(425, 403);
+            this.ibPreview.TabIndex = 8;
+            this.ibPreview.TabStop = false;
             // 
             // gbCameraSettings
             // 
@@ -243,15 +192,6 @@
             this.rbPCWebcam.Text = "PC Webcam";
             this.rbPCWebcam.UseVisualStyleBackColor = true;
             this.rbPCWebcam.CheckedChanged += new System.EventHandler(this.rbAndroid_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(706, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
             // 
             // gbPrevInfo
             // 
@@ -324,7 +264,6 @@
             this.tbAcumulatorThresh.Size = new System.Drawing.Size(246, 45);
             this.tbAcumulatorThresh.TabIndex = 1;
             this.tbAcumulatorThresh.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.ttHelp.SetToolTip(this.tbAcumulatorThresh, resources.GetString("tbAcumulatorThresh.ToolTip"));
             this.tbAcumulatorThresh.Value = 120;
             this.tbAcumulatorThresh.Scroll += new System.EventHandler(this.tbCannyThresh_Scroll);
             // 
@@ -440,7 +379,6 @@
             this.numMinDist.Name = "numMinDist";
             this.numMinDist.Size = new System.Drawing.Size(40, 20);
             this.numMinDist.TabIndex = 3;
-            this.ttHelp.SetToolTip(this.numMinDist, resources.GetString("numMinDist.ToolTip"));
             this.numMinDist.Value = new decimal(new int[] {
             50,
             0,
@@ -455,7 +393,6 @@
             this.lblAccumulatorThresh.Size = new System.Drawing.Size(136, 13);
             this.lblAccumulatorThresh.TabIndex = 2;
             this.lblAccumulatorThresh.Text = "Accumulator threshold: 120";
-            this.ttHelp.SetToolTip(this.lblAccumulatorThresh, resources.GetString("lblAccumulatorThresh.ToolTip"));
             // 
             // lblMinRadius
             // 
@@ -483,7 +420,6 @@
             this.lblMinDist.Size = new System.Drawing.Size(46, 13);
             this.lblMinDist.TabIndex = 2;
             this.lblMinDist.Text = "Min dist:";
-            this.ttHelp.SetToolTip(this.lblMinDist, resources.GetString("lblMinDist.ToolTip"));
             // 
             // numDp
             // 
@@ -501,7 +437,6 @@
             this.numDp.Name = "numDp";
             this.numDp.Size = new System.Drawing.Size(40, 20);
             this.numDp.TabIndex = 3;
-            this.ttHelp.SetToolTip(this.numDp, resources.GetString("numDp.ToolTip"));
             this.numDp.Value = new decimal(new int[] {
             2,
             0,
@@ -516,7 +451,6 @@
             this.lblDp.Size = new System.Drawing.Size(24, 13);
             this.lblDp.TabIndex = 2;
             this.lblDp.Text = "Dp:";
-            this.ttHelp.SetToolTip(this.lblDp, resources.GetString("lblDp.ToolTip"));
             // 
             // numThickness
             // 
@@ -534,7 +468,6 @@
             this.numThickness.Name = "numThickness";
             this.numThickness.Size = new System.Drawing.Size(40, 20);
             this.numThickness.TabIndex = 3;
-            this.ttHelp.SetToolTip(this.numThickness, "The thickness of the lines which will be drawn.");
             this.numThickness.Value = new decimal(new int[] {
             2,
             0,
@@ -549,7 +482,6 @@
             this.lblThickness.Size = new System.Drawing.Size(59, 13);
             this.lblThickness.TabIndex = 2;
             this.lblThickness.Text = "Thickness:";
-            this.ttHelp.SetToolTip(this.lblThickness, "The thickness of the lines which will be drawn.");
             // 
             // cbColors
             // 
@@ -646,9 +578,7 @@
             // gbFilter
             // 
             this.gbFilter.Controls.Add(this.rbCanny);
-            this.gbFilter.Controls.Add(this.rbTriangle);
             this.gbFilter.Controls.Add(this.rbCircle);
-            this.gbFilter.Controls.Add(this.rbGrid);
             this.gbFilter.Controls.Add(this.rbGray);
             this.gbFilter.Controls.Add(this.rbBgr);
             this.gbFilter.Location = new System.Drawing.Point(9, 67);
@@ -670,39 +600,16 @@
             this.rbCanny.UseVisualStyleBackColor = true;
             this.rbCanny.CheckedChanged += new System.EventHandler(this.rbCanny_CheckedChanged);
             // 
-            // rbTriangle
-            // 
-            this.rbTriangle.AutoSize = true;
-            this.rbTriangle.Location = new System.Drawing.Point(168, 43);
-            this.rbTriangle.Name = "rbTriangle";
-            this.rbTriangle.Size = new System.Drawing.Size(68, 17);
-            this.rbTriangle.TabIndex = 0;
-            this.rbTriangle.Text = "Triangles";
-            this.rbTriangle.UseVisualStyleBackColor = true;
-            this.rbTriangle.CheckedChanged += new System.EventHandler(this.rbCanny_CheckedChanged);
-            // 
             // rbCircle
             // 
             this.rbCircle.AutoSize = true;
-            this.rbCircle.Location = new System.Drawing.Point(88, 43);
+            this.rbCircle.Location = new System.Drawing.Point(6, 43);
             this.rbCircle.Name = "rbCircle";
             this.rbCircle.Size = new System.Drawing.Size(56, 17);
             this.rbCircle.TabIndex = 0;
             this.rbCircle.TabStop = true;
             this.rbCircle.Text = "Circles";
             this.rbCircle.UseVisualStyleBackColor = true;
-            // 
-            // rbGrid
-            // 
-            this.rbGrid.AutoSize = true;
-            this.rbGrid.Location = new System.Drawing.Point(6, 43);
-            this.rbGrid.Name = "rbGrid";
-            this.rbGrid.Size = new System.Drawing.Size(44, 17);
-            this.rbGrid.TabIndex = 0;
-            this.rbGrid.TabStop = true;
-            this.rbGrid.Text = "Grid";
-            this.rbGrid.UseVisualStyleBackColor = true;
-            this.rbGrid.CheckedChanged += new System.EventHandler(this.rbCanny_CheckedChanged);
             // 
             // rbGray
             // 
@@ -727,15 +634,6 @@
             this.rbBgr.Text = "Bgr";
             this.rbBgr.UseVisualStyleBackColor = true;
             // 
-            // ibPreview
-            // 
-            this.ibPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ibPreview.Location = new System.Drawing.Point(703, 83);
-            this.ibPreview.Name = "ibPreview";
-            this.ibPreview.Size = new System.Drawing.Size(425, 403);
-            this.ibPreview.TabIndex = 2;
-            this.ibPreview.TabStop = false;
-            // 
             // lblPreview
             // 
             this.lblPreview.AutoSize = true;
@@ -745,13 +643,61 @@
             this.lblPreview.TabIndex = 2;
             this.lblPreview.Text = "Preview:";
             // 
+            // lblBaudrate
+            // 
+            this.lblBaudrate.AutoSize = true;
+            this.lblBaudrate.Location = new System.Drawing.Point(231, 16);
+            this.lblBaudrate.Name = "lblBaudrate";
+            this.lblBaudrate.Size = new System.Drawing.Size(53, 13);
+            this.lblBaudrate.TabIndex = 1;
+            this.lblBaudrate.Text = "Baudrate:";
+            // 
+            // lblPoort
+            // 
+            this.lblPoort.AutoSize = true;
+            this.lblPoort.Location = new System.Drawing.Point(6, 16);
+            this.lblPoort.Name = "lblPoort";
+            this.lblPoort.Size = new System.Drawing.Size(35, 13);
+            this.lblPoort.TabIndex = 1;
+            this.lblPoort.Text = "Poort:";
+            // 
+            // cbBaudrates
+            // 
+            this.cbBaudrates.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cbBaudrates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBaudrates.FormattingEnabled = true;
+            this.cbBaudrates.Items.AddRange(new object[] {
+            "300",
+            "600",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "19200",
+            "28800",
+            "31250",
+            "38400"});
+            this.cbBaudrates.Location = new System.Drawing.Point(290, 16);
+            this.cbBaudrates.Name = "cbBaudrates";
+            this.cbBaudrates.Size = new System.Drawing.Size(121, 21);
+            this.cbBaudrates.TabIndex = 0;
+            // 
+            // cbPorts
+            // 
+            this.cbPorts.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(47, 16);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(121, 21);
+            this.cbPorts.TabIndex = 0;
+            // 
             // tpGame
             // 
-            this.tpGame.Controls.Add(this.gbGameInfo);
-            this.tpGame.Controls.Add(this.pnlGameView);
-            this.tpGame.Controls.Add(this.lblGameView);
-            this.tpGame.Controls.Add(this.lblCamView);
             this.tpGame.Controls.Add(this.ibCamView);
+            this.tpGame.Controls.Add(this.gbGameInfo);
+            this.tpGame.Controls.Add(this.lblCamView);
             this.tpGame.Controls.Add(this.gbGameSettings);
             this.tpGame.Location = new System.Drawing.Point(4, 25);
             this.tpGame.Name = "tpGame";
@@ -760,6 +706,15 @@
             this.tpGame.TabIndex = 1;
             this.tpGame.Text = "Game";
             this.tpGame.UseVisualStyleBackColor = true;
+            // 
+            // ibCamView
+            // 
+            this.ibCamView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ibCamView.Location = new System.Drawing.Point(10, 48);
+            this.ibCamView.Name = "ibCamView";
+            this.ibCamView.Size = new System.Drawing.Size(516, 417);
+            this.ibCamView.TabIndex = 2;
+            this.ibCamView.TabStop = false;
             // 
             // gbGameInfo
             // 
@@ -782,23 +737,6 @@
             this.rtbGameInfo.TabIndex = 0;
             this.rtbGameInfo.Text = "";
             // 
-            // pnlGameView
-            // 
-            this.pnlGameView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlGameView.Location = new System.Drawing.Point(390, 45);
-            this.pnlGameView.Name = "pnlGameView";
-            this.pnlGameView.Size = new System.Drawing.Size(449, 420);
-            this.pnlGameView.TabIndex = 4;
-            // 
-            // lblGameView
-            // 
-            this.lblGameView.AutoSize = true;
-            this.lblGameView.Location = new System.Drawing.Point(387, 26);
-            this.lblGameView.Name = "lblGameView";
-            this.lblGameView.Size = new System.Drawing.Size(63, 13);
-            this.lblGameView.TabIndex = 3;
-            this.lblGameView.Text = "Game view:";
-            // 
             // lblCamView
             // 
             this.lblCamView.AutoSize = true;
@@ -808,27 +746,17 @@
             this.lblCamView.TabIndex = 3;
             this.lblCamView.Text = "Camera view:";
             // 
-            // ibCamView
-            // 
-            this.ibCamView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ibCamView.Location = new System.Drawing.Point(6, 45);
-            this.ibCamView.Name = "ibCamView";
-            this.ibCamView.Size = new System.Drawing.Size(378, 420);
-            this.ibCamView.TabIndex = 2;
-            this.ibCamView.TabStop = false;
-            // 
             // gbGameSettings
             // 
-            this.gbGameSettings.Controls.Add(this.lblTrackFigures);
-            this.gbGameSettings.Controls.Add(this.ckbxTriangles);
+            this.gbGameSettings.Controls.Add(this.lblPos2);
+            this.gbGameSettings.Controls.Add(this.lblPos1);
+            this.gbGameSettings.Controls.Add(this.lblSpeed);
             this.gbGameSettings.Controls.Add(this.ckbxCircles);
-            this.gbGameSettings.Controls.Add(this.ckbxRectangles);
-            this.gbGameSettings.Controls.Add(this.bttnStopGame);
-            this.gbGameSettings.Controls.Add(this.bttnSetGame);
-            this.gbGameSettings.Controls.Add(this.lblTiles);
-            this.gbGameSettings.Controls.Add(this.lblBy);
-            this.gbGameSettings.Controls.Add(this.numWidth);
-            this.gbGameSettings.Controls.Add(this.numHeight);
+            this.gbGameSettings.Controls.Add(this.bttnSend);
+            this.gbGameSettings.Controls.Add(this.bttnReset);
+            this.gbGameSettings.Controls.Add(this.bttnSetSecPos);
+            this.gbGameSettings.Controls.Add(this.bttnSetPos);
+            this.gbGameSettings.Controls.Add(this.nbSpeed);
             this.gbGameSettings.Location = new System.Drawing.Point(848, 39);
             this.gbGameSettings.Name = "gbGameSettings";
             this.gbGameSettings.Size = new System.Drawing.Size(280, 146);
@@ -836,165 +764,141 @@
             this.gbGameSettings.TabStop = false;
             this.gbGameSettings.Text = "Game Settings";
             // 
-            // lblTrackFigures
+            // lblPos2
             // 
-            this.lblTrackFigures.AutoSize = true;
-            this.lblTrackFigures.Location = new System.Drawing.Point(11, 57);
-            this.lblTrackFigures.Name = "lblTrackFigures";
-            this.lblTrackFigures.Size = new System.Drawing.Size(75, 13);
-            this.lblTrackFigures.TabIndex = 0;
-            this.lblTrackFigures.Text = "Track Figures:";
+            this.lblPos2.AutoSize = true;
+            this.lblPos2.Location = new System.Drawing.Point(9, 58);
+            this.lblPos2.Name = "lblPos2";
+            this.lblPos2.Size = new System.Drawing.Size(56, 13);
+            this.lblPos2.TabIndex = 11;
+            this.lblPos2.Text = "Position 2:";
             // 
-            // ckbxTriangles
+            // lblPos1
             // 
-            this.ckbxTriangles.AutoSize = true;
-            this.ckbxTriangles.Location = new System.Drawing.Point(202, 78);
-            this.ckbxTriangles.Name = "ckbxTriangles";
-            this.ckbxTriangles.Size = new System.Drawing.Size(69, 17);
-            this.ckbxTriangles.TabIndex = 9;
-            this.ckbxTriangles.Text = "Triangles";
-            this.ckbxTriangles.UseVisualStyleBackColor = true;
+            this.lblPos1.AutoSize = true;
+            this.lblPos1.Location = new System.Drawing.Point(9, 28);
+            this.lblPos1.Name = "lblPos1";
+            this.lblPos1.Size = new System.Drawing.Size(56, 13);
+            this.lblPos1.TabIndex = 11;
+            this.lblPos1.Text = "Position 1:";
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.Location = new System.Drawing.Point(9, 83);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(41, 13);
+            this.lblSpeed.TabIndex = 10;
+            this.lblSpeed.Text = "Speed:";
             // 
             // ckbxCircles
             // 
             this.ckbxCircles.AutoSize = true;
-            this.ckbxCircles.Location = new System.Drawing.Point(116, 78);
+            this.ckbxCircles.Location = new System.Drawing.Point(12, 123);
             this.ckbxCircles.Name = "ckbxCircles";
-            this.ckbxCircles.Size = new System.Drawing.Size(57, 17);
+            this.ckbxCircles.Size = new System.Drawing.Size(87, 17);
             this.ckbxCircles.TabIndex = 9;
-            this.ckbxCircles.Text = "Circles";
+            this.ckbxCircles.Text = "Track circles";
             this.ckbxCircles.UseVisualStyleBackColor = true;
             // 
-            // ckbxRectangles
+            // bttnReset
             // 
-            this.ckbxRectangles.AutoSize = true;
-            this.ckbxRectangles.Location = new System.Drawing.Point(14, 78);
-            this.ckbxRectangles.Name = "ckbxRectangles";
-            this.ckbxRectangles.Size = new System.Drawing.Size(80, 17);
-            this.ckbxRectangles.TabIndex = 9;
-            this.ckbxRectangles.Text = "Rectangles";
-            this.ckbxRectangles.UseVisualStyleBackColor = true;
+            this.bttnReset.BackColor = System.Drawing.Color.Transparent;
+            this.bttnReset.Enabled = false;
+            this.bttnReset.Location = new System.Drawing.Point(196, 117);
+            this.bttnReset.Name = "bttnReset";
+            this.bttnReset.Size = new System.Drawing.Size(75, 23);
+            this.bttnReset.TabIndex = 8;
+            this.bttnReset.Text = "Reset";
+            this.bttnReset.UseVisualStyleBackColor = false;
+            this.bttnReset.Click += new System.EventHandler(this.bttnReset_Click);
             // 
-            // bttnStopGame
+            // bttnSetSecPos
             // 
-            this.bttnStopGame.BackColor = System.Drawing.Color.Transparent;
-            this.bttnStopGame.Enabled = false;
-            this.bttnStopGame.Location = new System.Drawing.Point(196, 111);
-            this.bttnStopGame.Name = "bttnStopGame";
-            this.bttnStopGame.Size = new System.Drawing.Size(75, 23);
-            this.bttnStopGame.TabIndex = 8;
-            this.bttnStopGame.Text = "Stop Game";
-            this.bttnStopGame.UseVisualStyleBackColor = false;
-            this.bttnStopGame.Click += new System.EventHandler(this.bttnStopGame_Click);
+            this.bttnSetSecPos.BackColor = System.Drawing.Color.Transparent;
+            this.bttnSetSecPos.Location = new System.Drawing.Point(196, 48);
+            this.bttnSetSecPos.Name = "bttnSetSecPos";
+            this.bttnSetSecPos.Size = new System.Drawing.Size(75, 23);
+            this.bttnSetSecPos.TabIndex = 8;
+            this.bttnSetSecPos.Text = "Set Position";
+            this.bttnSetSecPos.UseVisualStyleBackColor = false;
+            this.bttnSetSecPos.Click += new System.EventHandler(this.bttnSetPos_Click);
             // 
-            // bttnSetGame
+            // bttnSetPos
             // 
-            this.bttnSetGame.BackColor = System.Drawing.Color.Transparent;
-            this.bttnSetGame.Location = new System.Drawing.Point(116, 111);
-            this.bttnSetGame.Name = "bttnSetGame";
-            this.bttnSetGame.Size = new System.Drawing.Size(75, 23);
-            this.bttnSetGame.TabIndex = 8;
-            this.bttnSetGame.Text = "Set Game";
-            this.bttnSetGame.UseVisualStyleBackColor = false;
-            this.bttnSetGame.Click += new System.EventHandler(this.bttnSetGame_Click);
+            this.bttnSetPos.BackColor = System.Drawing.Color.Transparent;
+            this.bttnSetPos.Location = new System.Drawing.Point(196, 19);
+            this.bttnSetPos.Name = "bttnSetPos";
+            this.bttnSetPos.Size = new System.Drawing.Size(75, 23);
+            this.bttnSetPos.TabIndex = 8;
+            this.bttnSetPos.Text = "Set Position";
+            this.bttnSetPos.UseVisualStyleBackColor = false;
+            this.bttnSetPos.Click += new System.EventHandler(this.bttnSetPos_Click);
             // 
-            // lblTiles
+            // nbSpeed
             // 
-            this.lblTiles.AutoSize = true;
-            this.lblTiles.Location = new System.Drawing.Point(11, 25);
-            this.lblTiles.Name = "lblTiles";
-            this.lblTiles.Size = new System.Drawing.Size(32, 13);
-            this.lblTiles.TabIndex = 6;
-            this.lblTiles.Text = "Tiles:";
-            // 
-            // lblBy
-            // 
-            this.lblBy.AutoSize = true;
-            this.lblBy.Location = new System.Drawing.Point(92, 27);
-            this.lblBy.Name = "lblBy";
-            this.lblBy.Size = new System.Drawing.Size(18, 13);
-            this.lblBy.TabIndex = 7;
-            this.lblBy.Text = "by";
-            // 
-            // numWidth
-            // 
-            this.numWidth.Location = new System.Drawing.Point(49, 23);
-            this.numWidth.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numWidth.Minimum = new decimal(new int[] {
+            this.nbSpeed.Location = new System.Drawing.Point(196, 83);
+            this.nbSpeed.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numWidth.Name = "numWidth";
-            this.numWidth.Size = new System.Drawing.Size(37, 20);
-            this.numWidth.TabIndex = 5;
-            this.numWidth.Value = new decimal(new int[] {
-            1,
+            this.nbSpeed.Name = "nbSpeed";
+            this.nbSpeed.Size = new System.Drawing.Size(75, 20);
+            this.nbSpeed.TabIndex = 5;
+            this.nbSpeed.Value = new decimal(new int[] {
+            20,
             0,
             0,
             0});
-            // 
-            // numHeight
-            // 
-            this.numHeight.Location = new System.Drawing.Point(116, 23);
-            this.numHeight.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numHeight.Name = "numHeight";
-            this.numHeight.Size = new System.Drawing.Size(37, 20);
-            this.numHeight.TabIndex = 5;
-            this.numHeight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // bttnStart
-            // 
-            this.bttnStart.Location = new System.Drawing.Point(991, 539);
-            this.bttnStart.Name = "bttnStart";
-            this.bttnStart.Size = new System.Drawing.Size(75, 23);
-            this.bttnStart.TabIndex = 3;
-            this.bttnStart.Text = "Start";
-            this.bttnStart.UseVisualStyleBackColor = true;
-            this.bttnStart.Click += new System.EventHandler(this.bttnStart_Click);
             // 
             // bttnStop
             // 
-            this.bttnStop.Location = new System.Drawing.Point(1072, 539);
+            this.bttnStop.Location = new System.Drawing.Point(1071, 550);
             this.bttnStop.Name = "bttnStop";
             this.bttnStop.Size = new System.Drawing.Size(75, 23);
-            this.bttnStop.TabIndex = 3;
+            this.bttnStop.TabIndex = 4;
             this.bttnStop.Text = "Stop";
             this.bttnStop.UseVisualStyleBackColor = true;
             this.bttnStop.Click += new System.EventHandler(this.bttnStop_Click);
             // 
             // bttnClear
             // 
-            this.bttnClear.Location = new System.Drawing.Point(910, 539);
+            this.bttnClear.Location = new System.Drawing.Point(909, 550);
             this.bttnClear.Name = "bttnClear";
             this.bttnClear.Size = new System.Drawing.Size(75, 23);
-            this.bttnClear.TabIndex = 3;
+            this.bttnClear.TabIndex = 5;
             this.bttnClear.Text = "Clear";
             this.bttnClear.UseVisualStyleBackColor = true;
             this.bttnClear.Click += new System.EventHandler(this.bttnClear_Click);
+            // 
+            // bttnStart
+            // 
+            this.bttnStart.Location = new System.Drawing.Point(990, 550);
+            this.bttnStart.Name = "bttnStart";
+            this.bttnStart.Size = new System.Drawing.Size(75, 23);
+            this.bttnStart.TabIndex = 6;
+            this.bttnStart.Text = "Start";
+            this.bttnStart.UseVisualStyleBackColor = true;
+            this.bttnStart.Click += new System.EventHandler(this.bttnStart_Click);
+            // 
+            // bttnSend
+            // 
+            this.bttnSend.BackColor = System.Drawing.Color.Transparent;
+            this.bttnSend.Enabled = false;
+            this.bttnSend.Location = new System.Drawing.Point(115, 117);
+            this.bttnSend.Name = "bttnSend";
+            this.bttnSend.Size = new System.Drawing.Size(75, 23);
+            this.bttnSend.TabIndex = 8;
+            this.bttnSend.Text = "Send";
+            this.bttnSend.UseVisualStyleBackColor = false;
+            this.bttnSend.Click += new System.EventHandler(this.bttnSend_Click);
             // 
             // frmVRInterfaces
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1161, 574);
+            this.ClientSize = new System.Drawing.Size(1161, 582);
             this.Controls.Add(this.bttnStop);
             this.Controls.Add(this.bttnClear);
             this.Controls.Add(this.bttnStart);
@@ -1005,6 +909,7 @@
             this.tcTabs.ResumeLayout(false);
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ibPreview)).EndInit();
             this.gbCameraSettings.ResumeLayout(false);
             this.gbCameraSettings.PerformLayout();
             this.gbPrevInfo.ResumeLayout(false);
@@ -1024,91 +929,82 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbMinThresh)).EndInit();
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ibPreview)).EndInit();
             this.tpGame.ResumeLayout(false);
             this.tpGame.PerformLayout();
-            this.gbGameInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ibCamView)).EndInit();
+            this.gbGameInfo.ResumeLayout(false);
             this.gbGameSettings.ResumeLayout(false);
             this.gbGameSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nbSpeed)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbPorts;
-        private System.Windows.Forms.Label lblPoort;
-        private System.Windows.Forms.ComboBox cbBaudrates;
-        private System.Windows.Forms.Label lblBaudrate;
         private System.Windows.Forms.TabControl tcTabs;
-        private System.Windows.Forms.TabPage tpGame;
         private System.Windows.Forms.TabPage tpSettings;
-        private System.Windows.Forms.Button bttnStart;
-        private System.Windows.Forms.Button bttnStop;
-        private System.Windows.Forms.Label lblPreview;
         private Emgu.CV.UI.ImageBox ibPreview;
-        private System.Windows.Forms.GroupBox gbFilter;
-        private System.Windows.Forms.RadioButton rbCanny;
-        private System.Windows.Forms.RadioButton rbGray;
-        private System.Windows.Forms.RadioButton rbBgr;
-        private System.Windows.Forms.RadioButton rbTriangle;
-        private System.Windows.Forms.RadioButton rbCircle;
-        private System.Windows.Forms.RadioButton rbGrid;
-        private System.Windows.Forms.GroupBox gbThreshold;
-        private System.Windows.Forms.Label lblMinThreshold;
-        private System.Windows.Forms.TrackBar tbMinThresh;
-        private System.Windows.Forms.Label lblMaxThreshold;
-        private System.Windows.Forms.TrackBar tbMaxThresh;
+        private System.Windows.Forms.GroupBox gbCameraSettings;
+        private System.Windows.Forms.RadioButton rbAndroid;
+        private System.Windows.Forms.RadioButton rbPCWebcam;
+        private System.Windows.Forms.GroupBox gbPrevInfo;
+        private System.Windows.Forms.RichTextBox rtbPreviewInfo;
         private System.Windows.Forms.GroupBox gbParameters;
-        private System.Windows.Forms.Label lblFont;
-        private System.Windows.Forms.ComboBox cbFonts;
-        private System.Windows.Forms.ComboBox cbColors;
-        private System.Windows.Forms.Label lblColor;
+        private System.Windows.Forms.CheckBox ckbxShowLabels;
+        private System.Windows.Forms.TrackBar tbAcumulatorThresh;
+        private System.Windows.Forms.Label lblArea;
         private System.Windows.Forms.Label lblSize;
+        private System.Windows.Forms.TrackBar tbCannyThresh;
+        private System.Windows.Forms.NumericUpDown numArea;
         private System.Windows.Forms.NumericUpDown numSize;
-        private System.Windows.Forms.NumericUpDown numThickness;
-        private System.Windows.Forms.Label lblThickness;
+        private System.Windows.Forms.NumericUpDown numMinRadius;
         private System.Windows.Forms.NumericUpDown numMinDist;
+        private System.Windows.Forms.Label lblAccumulatorThresh;
+        private System.Windows.Forms.Label lblMinRadius;
+        private System.Windows.Forms.Label lblCannyThresh;
         private System.Windows.Forms.Label lblMinDist;
         private System.Windows.Forms.NumericUpDown numDp;
         private System.Windows.Forms.Label lblDp;
-        private System.Windows.Forms.TrackBar tbAcumulatorThresh;
-        private System.Windows.Forms.TrackBar tbCannyThresh;
-        private System.Windows.Forms.Label lblCannyThresh;
-        private System.Windows.Forms.ToolTip ttHelp;
-        private System.Windows.Forms.Label lblAccumulatorThresh;
-        private System.Windows.Forms.NumericUpDown numMinRadius;
-        private System.Windows.Forms.Label lblMinRadius;
-        private System.Windows.Forms.Label lblArea;
-        private System.Windows.Forms.NumericUpDown numArea;
-        private System.Windows.Forms.GroupBox gbPrevInfo;
-        private System.Windows.Forms.RichTextBox rtbPreviewInfo;
-        private System.Windows.Forms.Panel pnlGameView;
-        private System.Windows.Forms.Label lblGameView;
-        private System.Windows.Forms.Label lblCamView;
+        private System.Windows.Forms.NumericUpDown numThickness;
+        private System.Windows.Forms.Label lblThickness;
+        private System.Windows.Forms.ComboBox cbColors;
+        private System.Windows.Forms.Label lblColor;
+        private System.Windows.Forms.ComboBox cbFonts;
+        private System.Windows.Forms.Label lblFont;
+        private System.Windows.Forms.GroupBox gbThreshold;
+        private System.Windows.Forms.TrackBar tbMaxThresh;
+        private System.Windows.Forms.TrackBar tbMinThresh;
+        private System.Windows.Forms.Label lblMaxThreshold;
+        private System.Windows.Forms.Label lblMinThreshold;
+        private System.Windows.Forms.GroupBox gbFilter;
+        private System.Windows.Forms.RadioButton rbCanny;
+        private System.Windows.Forms.RadioButton rbCircle;
+        private System.Windows.Forms.RadioButton rbGray;
+        private System.Windows.Forms.RadioButton rbBgr;
+        private System.Windows.Forms.Label lblPreview;
+        private System.Windows.Forms.Label lblBaudrate;
+        private System.Windows.Forms.Label lblPoort;
+        private System.Windows.Forms.ComboBox cbBaudrates;
+        private System.Windows.Forms.ComboBox cbPorts;
+        private System.Windows.Forms.TabPage tpGame;
         private Emgu.CV.UI.ImageBox ibCamView;
-        private System.Windows.Forms.GroupBox gbGameSettings;
-        private System.Windows.Forms.Label lblTiles;
-        private System.Windows.Forms.Label lblBy;
-        private System.Windows.Forms.NumericUpDown numWidth;
-        private System.Windows.Forms.NumericUpDown numHeight;
-        private System.Windows.Forms.Button bttnSetGame;
-        private System.Windows.Forms.CheckBox ckbxShowLabels;
         private System.Windows.Forms.GroupBox gbGameInfo;
         private System.Windows.Forms.RichTextBox rtbGameInfo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox gbCameraSettings;
-        private System.Windows.Forms.RadioButton rbPCWebcam;
-        private System.Windows.Forms.RadioButton rbAndroid;
-        private System.Windows.Forms.Button bttnStopGame;
-        private System.Windows.Forms.Button bttnClear;
-        private System.Windows.Forms.CheckBox ckbxRectangles;
-        private System.Windows.Forms.Label lblTrackFigures;
-        private System.Windows.Forms.CheckBox ckbxTriangles;
+        private System.Windows.Forms.Label lblCamView;
+        private System.Windows.Forms.GroupBox gbGameSettings;
+        private System.Windows.Forms.Label lblPos2;
+        private System.Windows.Forms.Label lblPos1;
+        private System.Windows.Forms.Label lblSpeed;
         private System.Windows.Forms.CheckBox ckbxCircles;
+        private System.Windows.Forms.Button bttnReset;
+        private System.Windows.Forms.Button bttnSetSecPos;
+        private System.Windows.Forms.Button bttnSetPos;
+        private System.Windows.Forms.NumericUpDown nbSpeed;
+        private System.Windows.Forms.Button bttnStop;
+        private System.Windows.Forms.Button bttnClear;
+        private System.Windows.Forms.Button bttnStart;
+        private System.Windows.Forms.Button bttnSend;
     }
 }
 

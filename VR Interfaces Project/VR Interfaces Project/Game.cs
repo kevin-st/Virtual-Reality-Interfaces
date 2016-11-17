@@ -68,7 +68,7 @@ namespace VR_Interfaces_Project
 
                     _grid[i, j].Enabled = false;
                     _grid[i, j].Name = "Cell " + counter;
-                    _grid[i, j].Text = "Cell " + counter;
+                    //_grid[i, j].Text = "Cell " + counter;
                     _grid[i, j].BackColor = System.Drawing.Color.Transparent;
                     _grid[i, j].FlatStyle = FlatStyle.Flat;
                     _grid[i, j].Width = form.GameView.Width / (int)_gameWidth;
@@ -99,6 +99,34 @@ namespace VR_Interfaces_Project
 
             _grid = null;
             _hasInitialzed = false;
+        }
+
+        public void AddToGameField(Triangle2DF[,] arr, string text)
+        {
+            for(byte i = 0; i < _gameHeight; i++)
+            {
+                for(byte j = 0; j < _gameWidth; j++)
+                {
+                    if(arr[i, j].Area != 0 && _grid[i,j].Text == "")
+                    {
+                        _grid[i, j].Text = text;
+                    }
+                }
+            }
+        }
+
+        public void AddToGameField(CircleF[,] arr, string text)
+        {
+            for (byte i = 0; i < _gameHeight; i++)
+            {
+                for (byte j = 0; j < _gameWidth; j++)
+                {
+                    if (arr[i, j].Area != 0 && _grid[i, j].Text == "")
+                    {
+                        _grid[i, j].Text = text;
+                    }
+                }
+            }
         }
     }
 }

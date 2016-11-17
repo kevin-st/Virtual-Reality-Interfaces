@@ -24,6 +24,8 @@ namespace VR_Interfaces_Project
         private ushort countWrittenToDisplay = 0;
         private Game mGame;
         private RotatedRect[,] rects;
+        private Triangle2DF[,] triangs;
+        private CircleF[,] circs;
         private bool mIsRunning = false;
         private const int PCWEBCAM = 0, ANDROIDWEBCAM = 1;
 
@@ -364,6 +366,11 @@ namespace VR_Interfaces_Project
 
             DrawCircles(grayImg, out circleImg, circles, f, fontsize, c, thickness);
 
+            if(tcTabs.SelectedTab == tpGame)
+            {
+                AddCirclesToGameField(circles);
+            }
+
             return circleImg;
         }
 
@@ -441,7 +448,73 @@ namespace VR_Interfaces_Project
             FindFigures(contours, triangles, area, typeof(Triangle2DF));
 
             DrawTriangles(cannyImg, out triangleImg, triangles, c, f, fontsize, thickness);
+
+            if (tcTabs.SelectedTab == tpGame)
+            {
+                AddTrianglesToGameField(triangles);
+            }
+
             return triangleImg;
+        }
+
+        private void AddTrianglesToGameField(List<dynamic> triangles)
+        {
+            byte minDist = 200;
+            byte currentIndex = 0;
+
+            try
+             {
+                for (byte i = 0; i < mGame.Height; i++)
+                {
+                    for (byte j = 0; j < mGame.Width; j++)
+                    {
+                        float distX = Math.Abs(rects[i, j].Center.X - triangles[currentIndex].Centeroid.X);
+                        float distY = Math.Abs(rects[i, j].Center.Y - triangles[currentIndex].Centeroid.Y);
+
+                        if (distX < minDist && distY < minDist)
+                        {
+                            triangs[i, j] = triangles[currentIndex];
+                            currentIndex++;
+                        }
+                    }
+                }
+
+                mGame.AddToGameField(triangs, "D");
+            }
+            catch(Exception e)
+            {
+                WriteInfoToDisplay(rtbGameInfo, e.GetType() + ": " + e.Message);
+            }
+        }
+
+        private void AddCirclesToGameField(CircleF[] circles)
+        {
+            byte minDist = 5;
+            byte currentIndex = 0;
+
+            try
+            {
+                for (byte i = 0; i < mGame.Height; i++)
+                {
+                    for (byte j = 0; j < mGame.Width; j++)
+                    {
+                        float distX = Math.Abs(rects[i, j].Center.X - circles[currentIndex].Center.X);
+                        float distY = Math.Abs(rects[i, j].Center.Y - circles[currentIndex].Center.Y);
+
+                        if (distX < minDist && distY < minDist)
+                        {
+                            circs[i, j] = circles[currentIndex];
+                            currentIndex++;
+                        }
+                    }
+                }
+
+                mGame.AddToGameField(circs, "C");
+            }
+            catch (Exception e)
+            {
+                WriteInfoToDisplay(rtbGameInfo, e.GetType() + ": " + e.Message);
+            }
         }
 
         /// <summary>
@@ -609,14 +682,16 @@ namespace VR_Interfaces_Project
                         WriteInfoToDisplay(rtbGameInfo, "Adding fields to array.");
 
                         byte currentRect = 0;
-                        byte square = (byte)Math.Sqrt(numRectangles);
+                        byte width = (byte)numWidth.Value, height = (byte)numHeight.Value;
 
-                        mGame = new Game(numWidth.Value, numHeight.Value, this);
-                        rects = new RotatedRect[square, square];
+                        mGame = new Game(width, height, this);
+                        rects = new RotatedRect[width, height];
+                        triangs = new Triangle2DF[width, height];
+                        circs = new CircleF[width, height];
 
-                        for (byte i = 0; i < square; i++)
+                        for (byte i = 0; i < height; i++)
                         {
-                            for (byte j = 0; j < square; j++)
+                            for (byte j = 0; j < width; j++)
                             {
                                 rects[i, j] = rectangles[currentRect];
                                 currentRect++;
